@@ -28,14 +28,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  const localSeoPages: MetadataRoute.Sitemap = [
+  const discoveryPages: MetadataRoute.Sitemap = [
     {
       url: `${siteUrl}/tr/izmit-web-tasarim`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${siteUrl}/agent`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
   ];
 
-  return [...homePages, ...projectPages, ...localSeoPages];
+  return [...homePages, ...projectPages, ...discoveryPages];
 }
