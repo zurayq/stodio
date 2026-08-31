@@ -11,7 +11,7 @@ export function OpenProjectButton({ className = "", children, ...props }: Button
   };
 
   return (
-    <button {...props} type="button" className={className} onClick={openDialog}>
+    <button {...props} type="button" className={className} onClick={openDialog} data-analytics-event="project_inquiry_start">
       {children}
     </button>
   );

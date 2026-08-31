@@ -87,8 +87,15 @@ export function ContactDialog({ data }: ContactDialogProps) {
               </label>
             </div>
             <div className="form-submit-row">
-              <button className="button button--ink" type="submit">{data.send} <span aria-hidden="true">↗</span></button>
-              <small>{data.mailNote}</small>
+              <button
+                className="button button--ink"
+                type="submit"
+                aria-describedby="project-mail-note"
+                data-analytics-event="project_inquiry_email_handoff"
+              >
+                {data.send} <span aria-hidden="true">↗</span>
+              </button>
+              <small id="project-mail-note">{data.mailNote}</small>
             </div>
           </form>
         </div>

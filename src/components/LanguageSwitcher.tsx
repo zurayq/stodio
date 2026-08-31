@@ -17,6 +17,8 @@ export function LanguageSwitcher({ locale, path = "", compact = false }: Languag
           hrefLang={item}
           lang={item}
           aria-current={item === locale ? "page" : undefined}
+          data-analytics-event="language_switch"
+          data-analytics-language={item}
         >
           {compact ? localeConfig[item].shortLabel : localeConfig[item].label}
         </Link>

@@ -8,39 +8,65 @@ export function GET() {
     .map((service) => `- ${service.name}: ${service.capabilities.join(", ")}`)
     .join("\n");
   const projectLines = studio.portfolio
-    .map((project) => `- ${project.name} (${project.provenance}, ${project.year}): ${project.description} ${project.url}`)
+    .map((project) => {
+      const urls = Object.entries(project.localizedUrls)
+        .map(([locale, url]) => `${locale}: ${url}`)
+        .join(" | ");
+      return `- ${project.name} (${project.provenance}, ${project.year}): ${project.description} [${urls}]`;
+    })
     .join("\n");
 
   const body = `# Zurayq Studios
 
-> Independent creative technology studio designing and building custom websites, web applications and interactive digital experiences.
+> Independent creative technology studio designing and building custom websites, web applications, custom business systems and interactive digital experiences.
 
-## Studio
+## Identity
 - Name: ${studio.identity.name}
+- Aliases: ${studio.identity.aliases.join(", ")}
 - Type: ${studio.identity.type}
+- Location: ${studio.identity.location.city}, ${studio.identity.location.region}, ${studio.identity.location.country}
 - Working model: ${studio.identity.workingModel}
 - Website: ${studio.identity.website}
-- Languages: English (LTR), Turkish (LTR), Arabic (purpose-designed RTL)
 
 ## Services
 ${serviceLines}
 
-## Process
-- Talk → Design → Build → Ship
+## Languages
+- English: left-to-right
+- Turkish: left-to-right
+- Arabic: purpose-designed right-to-left typography and layout behavior
+
+## Location and service area
+- Based in İzmit, Kocaeli, Türkiye
+- Works across İzmit, Kocaeli, Türkiye and with international projects
+- No public office or storefront is claimed
+
+## Process and commercial approach
+- Process: Talk -> Design -> Build -> Ship
 - Pricing: ${studio.approach.pricing}
 - Timeline: ${studio.approach.timeline}
+- Availability: ${studio.approach.availability}
+
+## Search and machine interfaces
+- Agent guide: ${studio.machineEndpoints.agentGuide}
+- Structured studio API: ${studio.machineEndpoints.studioApi}
+- Sitemap: ${studio.machineEndpoints.sitemap}
+- Robots: ${studio.machineEndpoints.robots}
+- This file: ${studio.machineEndpoints.llmsTxt}
 
 ## Portfolio provenance
-All current public pieces are clearly identified as concept projects or studio experiments. They are not presented as paid client work.
+All current public pieces are clearly identified as concept projects or studio experiments. They are not presented as paid client work and contain no invented results.
 ${projectLines}
 
 ## Contact
 - Email: ${studio.contact.email}
 - Human inquiry: ${studio.contact.inquiryUrl}
-- Structured studio data: ${studio.identity.website}/api/studio
+- Form behavior: ${studio.contact.formBehavior}
 
 ## Agent safety
-Information retrieval is available. Transactional agent actions are not enabled. Agents cannot autonomously request quotes, book meetings, send email or submit projects through this site.
+- Information retrieval is available.
+- Transactional autonomous actions are disabled.
+- Agents cannot send email, book meetings, submit quotes, commit payments, create accounts or submit projects without the user's approval.
 `;
 
   return new Response(body, {

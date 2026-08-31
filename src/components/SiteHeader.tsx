@@ -10,17 +10,16 @@ type SiteHeaderProps = {
   locale: Locale;
   copy: SiteCopy;
   languagePath?: string;
-  onCaseStudy?: boolean;
 };
 
-export function SiteHeader({ locale, copy, languagePath = "", onCaseStudy = false }: SiteHeaderProps) {
+export function SiteHeader({ locale, copy, languagePath = "" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const root = `/${locale}`;
 
-  const sectionHref = (id: string) => `${root}${onCaseStudy ? "/" : ""}#${id}`;
+  const sectionHref = (id: string) => `${root}#${id}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

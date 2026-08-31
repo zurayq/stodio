@@ -61,6 +61,11 @@ export function StudioPage({ locale }: StudioPageProps) {
             </Reveal>
             <Reveal className="thesis__body" delay={80}>
               <p>{content.thesis.body}</p>
+              {locale === "tr" && (
+                <Link className="local-service-link" href="/tr/izmit-web-tasarim">
+                  İzmit web tasarım ve web geliştirme hizmetleri <span aria-hidden="true">↗</span>
+                </Link>
+              )}
             </Reveal>
             <div className="thesis__notes">
               {content.thesis.notes.map((note, index) => (
@@ -92,7 +97,12 @@ export function StudioPage({ locale }: StudioPageProps) {
               const kind = project.kind === "concept" ? content.common.concept : content.common.experiment;
               return (
                 <Reveal className={`work-item work-item--${index + 1}`} key={project.slug}>
-                  <Link href={`/${locale}/work/${project.slug}`} aria-label={`${content.common.exploreProject}: ${projectCopy.title}`}>
+                  <Link
+                    href={`/${locale}/work/${project.slug}`}
+                    aria-label={`${content.common.exploreProject}: ${projectCopy.title}`}
+                    data-analytics-event="case_study_view"
+                    data-analytics-project={project.slug}
+                  >
                     <div className="work-item__media">
                       <ProjectArtwork visual={project.visual} title={projectCopy.title} />
                       <span className="work-item__index">0{index + 1}</span>
@@ -210,7 +220,7 @@ export function StudioPage({ locale }: StudioPageProps) {
               <p>{content.contact.body}</p>
             </Reveal>
             <Reveal className="contact__actions" delay={100}>
-              <OpenProjectButton className="contact-disc" aria-label={content.common.startProject}>
+              <OpenProjectButton className="contact-disc" aria-label={`${content.common.startProject} — Zurayq Studios`}>
                 <span>{content.common.startProject}</span><i aria-hidden="true">↗</i>
               </OpenProjectButton>
               <p>{content.contact.reassurance}</p>
@@ -226,10 +236,12 @@ export function StudioPage({ locale }: StudioPageProps) {
             <p>{content.footer.descriptor}</p>
           </div>
           <div className="footer-links">
-            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <a href={`mailto:${contactEmail}`} data-analytics-event="email_cta_click">{contactEmail}</a>
             <a href="#work">{content.nav.work}</a>
             <a href="#services">{content.nav.services}</a>
             <a href="#studio">{content.nav.studio}</a>
+            {locale === "tr" && <Link href="/tr/izmit-web-tasarim">İzmit web tasarım</Link>}
+            <Link href="/agent">Agent interface</Link>
           </div>
           <div className="footer-meta">
             <span>{content.footer.availability}</span>

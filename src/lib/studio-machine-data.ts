@@ -1,53 +1,95 @@
-import { contactEmail, siteUrl } from "@/lib/config";
-import { projects } from "@/lib/site-data";
+import {
+  contactEmail,
+  siteContentUpdatedAt,
+  siteUrl,
+  studioLocation,
+} from "@/lib/config";
+import { locales, projects } from "@/lib/site-data";
+import { absoluteUrl, localizedUrl, studioAliases, studioCapabilities } from "@/lib/seo";
 
 export function getStudioMachineData() {
   return {
-    schemaVersion: "1.0",
-    updatedAt: "2026-08-30",
+    schemaVersion: "1.1",
+    updatedAt: siteContentUpdatedAt,
     identity: {
       name: "Zurayq Studios",
+      aliases: [...studioAliases],
       type: "Independent creative technology studio",
       description:
-        "Zurayq Studios designs and builds custom websites, web applications and interactive digital experiences.",
+        "Zurayq Studios designs and builds custom websites, web applications, custom business systems and interactive digital experiences.",
       website: siteUrl,
-      workingModel: "Small, independent and direct; working internationally.",
+      location: studioLocation,
+      workingModel: "Based in İzmit, Kocaeli and working internationally as a small, independent and direct studio.",
+      capabilities: [...studioCapabilities],
     },
     services: [
       {
         id: "websites",
-        name: "Websites",
+        name: "Custom websites",
         capabilities: [
-          "Custom marketing websites",
+          "Custom web design",
+          "Web development",
           "Hospitality and restaurant websites",
           "Portfolio and campaign websites",
           "Responsive design",
           "CMS-ready content systems",
           "Accessibility",
-          "Performance and SEO foundations",
+          "Performance optimization",
+          "Technical SEO foundations",
         ],
       },
       {
         id: "web-applications",
-        name: "Web applications",
-        capabilities: ["Dashboards", "Admin panels", "Booking systems", "Customer portals", "Internal tools", "Custom workflows"],
+        name: "Web applications and custom systems",
+        capabilities: [
+          "Dashboards",
+          "Admin panels",
+          "Booking systems",
+          "Customer portals",
+          "Internal tools",
+          "Custom business workflows",
+        ],
       },
       {
         id: "creative-development",
         name: "Creative development",
-        capabilities: ["Interactive storytelling", "Canvas", "Creative coding", "Advanced motion", "Experimental interfaces"],
+        capabilities: [
+          "Interactive storytelling",
+          "Canvas experiences",
+          "Creative coding",
+          "Advanced motion",
+          "Experimental interfaces",
+        ],
       },
       {
         id: "3d-motion",
         name: "3D and motion",
         capabilities: ["WebGL", "Three.js", "Interactive models", "Spatial typography", "Motion systems"],
       },
+      {
+        id: "search-discoverability",
+        name: "Search and AI discoverability",
+        capabilities: [
+          "Technical SEO",
+          "Multilingual SEO foundations",
+          "Structured data",
+          "Machine-readable website architecture",
+          "AI-search discoverability",
+          "Agent-readable interfaces",
+        ],
+      },
     ],
     languages: [
       { code: "en", name: "English", direction: "ltr" },
       { code: "tr", name: "Turkish", direction: "ltr" },
-      { code: "ar", name: "Arabic", direction: "rtl", note: "Purpose-designed RTL behavior; not a blind mirrored layout." },
+      {
+        code: "ar",
+        name: "Arabic",
+        direction: "rtl",
+        note: "Purpose-designed Arabic typography and RTL behavior; not a blind mirrored layout.",
+      },
     ],
+    areaServed: ["İzmit", "Kocaeli", "Türkiye", "Worldwide"],
     projectTypes: [
       "Website",
       "Web application",
@@ -55,12 +97,48 @@ export function getStudioMachineData() {
       "3D or motion experience",
       "Existing website redesign",
       "Custom business system",
+      "Multilingual website",
+      "Arabic RTL website",
     ],
     approach: {
       stages: ["Talk", "Design", "Build", "Ship"],
       pricing: "Project-scoped. The inquiry form uses ranges and accepts 'not sure yet'.",
       timeline: "Discussed per project after goals, scope, content and constraints are understood.",
       availability: "Confirmed directly for each inquiry; no live availability claim is published.",
+    },
+    searchDiscovery: {
+      brandTerms: [
+        "Zurayq Studios",
+        "Zurayq Studio",
+        "Zurayq",
+        "زريق ستوديو",
+        "زريق",
+        "Zurayq web",
+        "Zurayq web design",
+        "Zurayq software",
+        "Zurayq Studios İzmit",
+      ],
+      localTopics: [
+        "İzmit web tasarım",
+        "İzmit web geliştirme",
+        "İzmit özel yazılım",
+        "Kocaeli web tasarım",
+        "Kocaeli web geliştirme",
+        "Kocaeli özel yazılım",
+        "çok dilli web sitesi",
+        "Arapça RTL web tasarım",
+      ],
+      specialistTopics: [
+        "Custom web design",
+        "Creative web development",
+        "Interactive web development",
+        "Multilingual website development",
+        "Arabic RTL web design",
+        "Custom web application development",
+        "Three.js web development",
+        "AI-ready websites",
+        "Agent-readable websites",
+      ],
     },
     portfolio: projects.map((project) => ({
       id: project.slug,
@@ -69,17 +147,34 @@ export function getStudioMachineData() {
       year: project.year,
       description: project.copy.en.summary,
       disciplines: project.disciplines,
-      url: `${siteUrl}/en/work/${project.slug}`,
+      localizedUrls: Object.fromEntries(
+        locales.map((locale) => [locale, localizedUrl(locale, `/work/${project.slug}`)]),
+      ),
     })),
     contact: {
       email: contactEmail,
-      inquiryUrl: `${siteUrl}/en#contact`,
+      inquiryUrl: `${localizedUrl("en")}#contact`,
       formBehavior: "Creates a prefilled email in the visitor's email application; nothing is sent automatically.",
+    },
+    machineEndpoints: {
+      agentGuide: absoluteUrl("/agent"),
+      studioApi: absoluteUrl("/api/studio"),
+      llmsTxt: absoluteUrl("/llms.txt"),
+      sitemap: absoluteUrl("/sitemap.xml"),
+      robots: absoluteUrl("/robots.txt"),
     },
     agentActions: {
       informationRetrieval: true,
       transactionalActionsEnabled: false,
-      note: "No autonomous quote, booking, email or project-submission actions are enabled.",
+      allowed: ["Retrieve public studio, service, language, location and portfolio information"],
+      unavailable: [
+        "Send email autonomously",
+        "Book meetings",
+        "Submit quotes",
+        "Commit payments",
+        "Create client accounts",
+        "Submit projects without user approval",
+      ],
     },
   };
 }

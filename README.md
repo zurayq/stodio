@@ -2,6 +2,8 @@
 
 A custom, multilingual creative-technology studio website built with Next.js, React and TypeScript. The visual system uses editorial layouts, code-drawn project art and a pointer-responsive canvas rather than stock imagery or a template theme.
 
+Canonical production URL: `https://studio.zurayq.lol`
+
 ## Run locally
 
 ```bash
@@ -33,7 +35,12 @@ English, Turkish and Arabic are served at `/en`, `/tr` and `/ar`. Arabic uses a 
 
 - `/api/studio` — versioned, read-only structured studio data
 - `/llms.txt` — concise agent-readable capabilities and contact information
+- `/agent` — semantic human-readable guide for AI/browser agents
 - `/sitemap.xml` — localized home and project URLs
 - `/robots.txt` — crawl instructions
+
+The Turkish local service page is available at `/tr/izmit-web-tasarim`. It is intentionally a single useful local page rather than a generated set of near-duplicate city pages.
+
+Meaningful links and buttons include passive `data-analytics-*` attributes for future privacy-conscious measurement. No analytics or third-party tracking script is loaded by default.
 
 Transactional agent actions are explicitly disabled. The project form creates a prefilled email in the visitor's own email application; it does not silently submit or store data.

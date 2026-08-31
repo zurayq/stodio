@@ -4,15 +4,16 @@ import { siteUrl } from "@/lib/config";
 export const baseMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Zurayq Studios — Creative technology studio",
+    default: "Zurayq Studios — Custom web design and development",
     template: "%s — Zurayq Studios",
   },
   description:
-    "Independent creative technology studio building custom websites, web applications and interactive digital experiences.",
+    "Independent creative technology studio in İzmit, Kocaeli, building custom websites, web applications and interactive digital experiences.",
   applicationName: "Zurayq Studios",
   authors: [{ name: "Zurayq Studios" }],
   creator: "Zurayq Studios",
   category: "Creative technology",
+  referrer: "origin-when-cross-origin",
   formatDetection: { email: false, address: false, telephone: false },
   icons: { icon: "/icon.svg" },
 };

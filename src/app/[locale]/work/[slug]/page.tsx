@@ -6,8 +6,18 @@ import { OpenProjectButton } from "@/components/OpenProjectButton";
 import { ProjectArtwork } from "@/components/ProjectArtwork";
 import { Reveal } from "@/components/Reveal";
 import { SiteHeader } from "@/components/SiteHeader";
-import { contactEmail, siteUrl } from "@/lib/config";
+import { contactEmail } from "@/lib/config";
 import { copy, isLocale, localeConfig, locales, projects } from "@/lib/site-data";
+import {
+  absoluteUrl,
+  breadcrumbNode,
+  createLocalizedMetadata,
+  localizedUrl,
+  organizationNode,
+  serializeJsonLd,
+  webPageNode,
+  websiteNode,
+} from "@/lib/seo";
 
 type CasePageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -23,27 +33,13 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const project = projects.find((item) => item.slug === slug);
   if (!project) return {};
   const projectCopy = project.copy[locale];
-  return {
-    title: projectCopy.title,
+  return createLocalizedMetadata({
+    locale,
+    title: `${projectCopy.title} — ${project.kind === "concept" ? copy[locale].common.concept : copy[locale].common.experiment}`,
     description: projectCopy.summary,
-    alternates: {
-      canonical: `${siteUrl}/${locale}/work/${slug}`,
-      languages: Object.fromEntries(
-        [
-          ...locales.map((item) => [item, `${siteUrl}/${item}/work/${slug}`]),
-          ["x-default", `${siteUrl}/en/work/${slug}`],
-        ],
-      ),
-    },
-    openGraph: {
-      type: "article",
-      title: projectCopy.title,
-      description: projectCopy.summary,
-      url: `${siteUrl}/${locale}/work/${slug}`,
-      siteName: "Zurayq Studios",
-      locale: localeConfig[locale].ogLocale,
-    },
-  };
+    path: `/work/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function CaseStudyPage({ params }: CasePageProps) {
@@ -57,23 +53,42 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const nextCopy = nextProject.copy[locale];
   const kind = project.kind === "concept" ? content.common.concept : content.common.experiment;
+  const projectUrl = localizedUrl(locale, `/work/${slug}`);
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: projectCopy.title,
-    description: projectCopy.summary,
-    dateCreated: project.year,
-    creator: { "@type": "Organization", name: "Zurayq Studios", url: siteUrl },
-    url: `${siteUrl}/${locale}/work/${slug}`,
-    inLanguage: locale,
-    genre: kind,
+    "@graph": [
+      organizationNode(content.meta.description),
+      websiteNode(),
+      webPageNode({
+        url: projectUrl,
+        name: projectCopy.title,
+        description: projectCopy.summary,
+        locale,
+      }),
+      breadcrumbNode([
+        { name: "Zurayq Studios", url: localizedUrl(locale) },
+        { name: projectCopy.title, url: projectUrl },
+      ]),
+      {
+        "@type": "CreativeWork",
+        "@id": `${projectUrl}#creativework`,
+        name: projectCopy.title,
+        description: projectCopy.summary,
+        dateCreated: project.year,
+        creator: { "@id": absoluteUrl("/#studio") },
+        mainEntityOfPage: { "@id": `${projectUrl}#webpage` },
+        url: projectUrl,
+        inLanguage: locale,
+        genre: kind,
+      },
+    ],
   };
 
   return (
     <div className="site-shell case-shell" lang={locale} dir={localeConfig[locale].direction}>
       <a className="skip-link" href="#case-content">{content.nav.skip}</a>
-      <SiteHeader locale={locale} copy={content} languagePath={`/work/${slug}`} onCaseStudy />
+      <SiteHeader locale={locale} copy={content} languagePath={`/work/${slug}`} />
       <main className="case-study" id="case-content">
         <header className="case-hero section-pad">
           <div className="page-grid">
@@ -117,6 +132,17 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
           </div>
         </section>
 
+        {locale === "tr" && (
+          <aside className="case-service-note" aria-label="İlgili hizmet">
+            <span>İLGİLİ HİZMET /</span>
+            <p>
+              Benzer bir projeyi nasıl ele aldığımızı görmek için{" "}
+              <Link href="/tr/izmit-web-tasarim">İzmit web tasarım ve web geliştirme hizmetlerini</Link>{" "}
+              inceleyin.
+            </p>
+          </aside>
+        )}
+
         <section className="next-project">
           <Link href={`/${locale}/work/${nextProject.slug}`}>
             <span>{content.caseStudy.nextProject} / 0{(projectIndex + 1) % projects.length + 1}</span>
@@ -133,13 +159,13 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
       </main>
       <footer className="case-footer">
         <span>Zurayq Studios / {new Date().getFullYear()}</span>
-        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        <a href={`mailto:${contactEmail}`} data-analytics-event="email_cta_click">{contactEmail}</a>
         <Link href={`/${locale}`}>Z/</Link>
       </footer>
       <ContactDialog data={content.contact} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
       />
     </div>
   );

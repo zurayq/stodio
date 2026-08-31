@@ -150,9 +150,9 @@ export type SiteCopy = {
 export const copy: Record<Locale, SiteCopy> = {
   en: {
     meta: {
-      title: "Zurayq Studios — Creative technology studio",
+      title: "Custom Web Design & Development | Zurayq Studios",
       description:
-        "Independent creative technology studio building custom websites, web applications and interactive digital experiences.",
+        "Zurayq Studios designs and develops custom websites, web apps and interactive digital experiences, with multilingual English, Turkish and Arabic support.",
     },
     nav: {
       work: "Work",
@@ -266,7 +266,7 @@ export const copy: Record<Locale, SiteCopy> = {
       title: "Small on purpose.",
       lead: "Fewer hand-offs. Faster decisions. The people you meet are the people making the work.",
       body:
-        "Zurayq is an independent creative technology studio. We care how the first screen feels, how the last form behaves, and everything between.",
+        "Zurayq is an independent creative technology studio based in İzmit, Kocaeli and working internationally. We care how the first screen feels, how the last form behaves, and everything between.",
       principles: [
         {
           title: "Actually custom",
@@ -348,7 +348,7 @@ export const copy: Record<Locale, SiteCopy> = {
     footer: {
       descriptor: "Independent creative technology studio.",
       availability: "Project fit and timing are confirmed directly.",
-      localTime: "Working internationally",
+      localTime: "Based in İzmit, Kocaeli · working internationally",
       languageNote: "English · Türkçe · العربية",
     },
     caseStudy: {
@@ -362,9 +362,9 @@ export const copy: Record<Locale, SiteCopy> = {
   },
   tr: {
     meta: {
-      title: "Zurayq Studios — Yaratıcı teknoloji stüdyosu",
+      title: "İzmit Web Tasarım & Özel Yazılım | Zurayq Studios",
       description:
-        "Özel web siteleri, web uygulamaları ve interaktif dijital deneyimler geliştiren bağımsız yaratıcı teknoloji stüdyosu.",
+        "İzmit ve Kocaeli merkezli Zurayq Studios; özel web siteleri, web uygulamaları, özel yazılım ve Türkçe, İngilizce, Arapça çok dilli deneyimler geliştirir.",
     },
     nav: {
       work: "İşler",
@@ -471,7 +471,7 @@ export const copy: Record<Locale, SiteCopy> = {
       eyebrow: "Stüdyo",
       title: "Bilerek küçük.",
       lead: "Daha az devir teslim. Daha hızlı kararlar. Tanıştığınız insanlar işi yapan insanlar.",
-      body: "Zurayq bağımsız bir yaratıcı teknoloji stüdyosu. İlk ekranın hissini, son formun davranışını ve aradaki her şeyi önemsiyoruz.",
+      body: "Zurayq, İzmit ve Kocaeli merkezli ve uluslararası çalışan bağımsız bir yaratıcı teknoloji stüdyosu. İlk ekranın hissini, son formun davranışını ve aradaki her şeyi önemsiyoruz.",
       principles: [
         { title: "Gerçekten özel", body: "Görsel sistem, yapı ve etkileşimler projeye göre şekillenir." },
         { title: "Tasarım + mühendislik", body: "Nasıl göründüğü ve nasıl çalıştığı aynı anda düşünülür." },
@@ -517,7 +517,7 @@ export const copy: Record<Locale, SiteCopy> = {
     footer: {
       descriptor: "Bağımsız yaratıcı teknoloji stüdyosu.",
       availability: "Proje uygunluğu ve zamanlama doğrudan görüşülür.",
-      localTime: "Uluslararası çalışıyor",
+      localTime: "İzmit, Kocaeli merkezli · uluslararası çalışıyor",
       languageNote: "English · Türkçe · العربية",
     },
     caseStudy: {
@@ -531,8 +531,8 @@ export const copy: Record<Locale, SiteCopy> = {
   },
   ar: {
     meta: {
-      title: "Zurayq Studios — استوديو تقني إبداعي",
-      description: "استوديو تقني إبداعي مستقل يصمم مواقع وتطبيقات ويب وتجارب رقمية تفاعلية مخصصة.",
+      title: "زريق ستوديو | تصميم وتطوير مواقع وتطبيقات ويب",
+      description: "زريق ستوديو (Zurayq Studios) يصمم ويطور مواقع ويب مخصصة، تطبيقات ويب وتجارب رقمية تفاعلية بالعربية والتركية والإنجليزية.",
     },
     nav: {
       work: "الأعمال",
@@ -625,7 +625,7 @@ export const copy: Record<Locale, SiteCopy> = {
       eyebrow: "الاستوديو",
       title: "صغير عن قصد.",
       lead: "تسليمات أقل. قرارات أسرع. من تقابلهم هم من يصنعون العمل.",
-      body: "Zurayq استوديو تقني إبداعي مستقل. نهتم بإحساس الشاشة الأولى، وسلوك النموذج الأخير، وكل ما بينهما.",
+      body: "زريق ستوديو مستقل للتقنية الإبداعية، ينطلق من إزميت في كوجالي ويعمل دولياً. نهتم بإحساس الشاشة الأولى، وسلوك النموذج الأخير، وكل ما بينهما.",
       principles: [
         { title: "مخصص فعلاً", body: "يتشكل النظام البصري والبنية والتفاعل حول المشروع نفسه." },
         { title: "تصميم + هندسة", body: "نفكر في المظهر وطريقة العمل في الوقت نفسه." },
@@ -671,7 +671,7 @@ export const copy: Record<Locale, SiteCopy> = {
     footer: {
       descriptor: "استوديو تقني إبداعي مستقل.",
       availability: "نؤكد ملاءمة المشروع والوقت بشكل مباشر.",
-      localTime: "نعمل دولياً",
+      localTime: "من إزميت، كوجالي · نعمل دولياً",
       languageNote: "English · Türkçe · العربية",
     },
     caseStudy: {
