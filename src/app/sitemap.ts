@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       languages: Object.fromEntries(locales.map((item) => [item, `${siteUrl}/${item}`])),
     },
   }));
+
   const projectPages = locales.flatMap((locale) =>
     projects.map((project) => ({
       url: `${siteUrl}/${locale}/work/${project.slug}`,
@@ -26,5 +27,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
-  return [...homePages, ...projectPages];
+
+  const discoveryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteUrl}/tr/izmit-web-tasarim`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/agent`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+  ];
+
+  return [...homePages, ...projectPages, ...discoveryPages];
 }
