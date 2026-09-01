@@ -101,7 +101,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
             <p className="case-hero__summary">{projectCopy.summary}</p>
             <dl className="case-facts">
               <div><dt>{content.common.year}</dt><dd>{project.year}</dd></div>
-              <div><dt>{content.common.disciplines}</dt><dd>{project.disciplines.join(" / ")}</dd></div>
+              <div><dt>{content.common.disciplines}</dt><dd>{project.disciplines[locale].join(" / ")}</dd></div>
             </dl>
           </div>
         </header>
@@ -111,7 +111,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
         </div>
 
         <div className="case-notice page-grid">
-          <span aria-hidden="true">HONESTY NOTE /</span>
+          <span aria-hidden="true">{content.caseStudy.honestyLabel} /</span>
           <p>{content.caseStudy.note}</p>
         </div>
 

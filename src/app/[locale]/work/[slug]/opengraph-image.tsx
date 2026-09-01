@@ -48,7 +48,7 @@ export default async function ProjectOpenGraphImage({
         <div style={{ display: "flex", maxWidth: 760, marginTop: 34, fontSize: 28, lineHeight: 1.2 }}>{projectCopy.descriptor}</div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 17 }}>
-        <span>{project.disciplines.join(" / ")}</span>
+        <span>{project.disciplines[locale === "ar" ? "en" : locale].join(" / ")}</span>
         <span style={{ color: theme.accent }}>Z/</span>
       </div>
     </div>,

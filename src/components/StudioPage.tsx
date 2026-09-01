@@ -115,7 +115,7 @@ export function StudioPage({ locale }: StudioPageProps) {
                       </div>
                       <p>{projectCopy.summary}</p>
                       <div className="project-disciplines">
-                        {project.disciplines.map((item) => <span key={item}>{item}</span>)}
+                        {project.disciplines[locale].map((item) => <span key={item}>{item}</span>)}
                         <i>{project.year}</i>
                       </div>
                     </div>

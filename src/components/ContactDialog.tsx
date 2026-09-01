@@ -21,7 +21,7 @@ export function ContactDialog({ data }: ContactDialogProps) {
     if (!form.reportValidity()) return;
     const formData = new FormData(form);
     const name = String(formData.get("name") ?? "");
-    const subject = `Project inquiry — ${name}`;
+    const subject = `${data.mailSubject} — ${name}`;
     const rows = [
       `${data.name}: ${name}`,
       `${data.email}: ${String(formData.get("email") ?? "")}`,
@@ -40,7 +40,7 @@ export function ContactDialog({ data }: ContactDialogProps) {
     <dialog className="project-dialog" id="project-dialog" ref={dialogRef} onClick={closeOnBackdrop}>
       <div className="project-dialog__shell">
         <div className="project-dialog__aside">
-          <span className="eyebrow">Zurayq Studios / Inquiry</span>
+          <span className="eyebrow">{data.formEyebrow}</span>
           <h2>{data.formTitle}</h2>
           <p>{data.formIntro}</p>
           <div className="project-dialog__index" aria-hidden="true">Z/01</div>

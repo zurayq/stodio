@@ -146,7 +146,7 @@ export function getStudioMachineData() {
       provenance: project.kind === "concept" ? "concept project" : "studio experiment",
       year: project.year,
       description: project.copy.en.summary,
-      disciplines: project.disciplines,
+      disciplines: project.disciplines.en,
       localizedUrls: Object.fromEntries(
         locales.map((locale) => [locale, localizedUrl(locale, `/work/${project.slug}`)]),
       ),
