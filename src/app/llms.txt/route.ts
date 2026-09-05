@@ -12,7 +12,7 @@ export function GET() {
       const urls = Object.entries(project.localizedUrls)
         .map(([locale, url]) => `${locale}: ${url}`)
         .join(" | ");
-      return `- ${project.name} (${project.provenance}, ${project.year}): ${project.description} [${urls}]`;
+      return `- ${project.name} (${project.provenance}, ${project.year}): ${project.description} [${urls}] Source: ${project.sourceUrl}${project.liveUrl ? ` | Live: ${project.liveUrl}` : ""}\n  Implementation: ${project.implementationNotes}`;
     })
     .join("\n");
 
@@ -55,7 +55,7 @@ ${serviceLines}
 - This file: ${studio.machineEndpoints.llmsTxt}
 
 ## Portfolio provenance
-All current public pieces are clearly identified as concept projects or studio experiments. They are not presented as paid client work and contain no invented results.
+The selected portfolio contains three real independent projects with public source repositories. They are not presented as commissioned client work. The case studies distinguish implemented code from verified deployment behavior and do not claim business results.
 ${projectLines}
 
 ## Contact

@@ -94,7 +94,7 @@ export function StudioPage({ locale }: StudioPageProps) {
           <div className="work-list">
             {projects.map((project, index) => {
               const projectCopy = project.copy[locale];
-              const kind = project.kind === "concept" ? content.common.concept : content.common.experiment;
+              const kind = content.common.provenance[project.kind];
               return (
                 <Reveal className={`work-item work-item--${index + 1}`} key={project.slug}>
                   <Link
@@ -104,7 +104,7 @@ export function StudioPage({ locale }: StudioPageProps) {
                     data-analytics-project={project.slug}
                   >
                     <div className="work-item__media">
-                      <ProjectArtwork visual={project.visual} title={projectCopy.title} />
+                      <ProjectArtwork project={project} locale={locale} />
                       <span className="work-item__index">0{index + 1}</span>
                       <span className="work-item__view">{content.common.exploreProject} ↗</span>
                     </div>

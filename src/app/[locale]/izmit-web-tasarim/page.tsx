@@ -299,7 +299,7 @@ export default async function IzmitWebTasarimPage({ params }: LocalPageProps) {
           <div className="page-grid local-section-heading">
             <p className="eyebrow">İlgili çalışmalar</p>
             <h2 id="local-work-title">Yaklaşımı gösteren stüdyo projeleri.</h2>
-            <p>Bu çalışmalar ücretli müşteri işi değildir; konsept proje veya stüdyo deneyi olarak açıkça etiketlenir.</p>
+            <p>Kaynak kodu açık üç bağımsız tasarım ve geliştirme projesi. Müşteri işi olarak sunulmuyor.</p>
           </div>
           <div className="local-work-links">
             {projects.slice(0, 3).map((project, index) => (

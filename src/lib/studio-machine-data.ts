@@ -9,7 +9,7 @@ import { absoluteUrl, localizedUrl, studioAliases, studioCapabilities } from "@/
 
 export function getStudioMachineData() {
   return {
-    schemaVersion: "1.1",
+    schemaVersion: "1.2",
     updatedAt: siteContentUpdatedAt,
     identity: {
       name: "Zurayq Studios",
@@ -143,10 +143,14 @@ export function getStudioMachineData() {
     portfolio: projects.map((project) => ({
       id: project.slug,
       name: project.copy.en.title,
-      provenance: project.kind === "concept" ? "concept project" : "studio experiment",
+      provenance: "independent project",
       year: project.year,
       description: project.copy.en.summary,
+      implementationNotes: project.copy.en.build,
       disciplines: project.disciplines.en,
+      url: localizedUrl("en", `/work/${project.slug}`),
+      sourceUrl: project.sourceUrl,
+      liveUrl: project.liveUrl,
       localizedUrls: Object.fromEntries(
         locales.map((locale) => [locale, localizedUrl(locale, `/work/${project.slug}`)]),
       ),

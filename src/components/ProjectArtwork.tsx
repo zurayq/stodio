@@ -1,83 +1,73 @@
-import { Project } from "@/lib/site-data";
+import Image from "next/image";
+import type { Locale, Project } from "@/lib/site-data";
+import { artworkCopy } from "@/lib/project-artwork-data";
 
-type ProjectArtworkProps = {
-  visual: Project["visual"];
-  title: string;
-  large?: boolean;
-};
+type ProjectArtworkProps = { project: Project; locale: Locale; large?: boolean };
 
-export function ProjectArtwork({ visual, title, large = false }: ProjectArtworkProps) {
+function PassportArtwork({ project, locale }: ProjectArtworkProps) {
+  const text = artworkCopy[locale].passport;
   return (
-    <div className={`project-art project-art--${visual} ${large ? "project-art--large" : ""}`} aria-label={`${title} visual study`} role="img">
-      {visual === "sahra" && (
-        <>
-          <div className="sahra-sun" />
-          <div className="sahra-arch sahra-arch--one" />
-          <div className="sahra-arch sahra-arch--two" />
-          <div className="sahra-type">
-            <small>COAST / 36° N</small>
-            <strong>SAHRA</strong>
-            <span>سَاحِل / بَيْت</span>
-          </div>
-          <div className="sahra-ticket">
-            <span>STAY 03</span>
-            <b>Room for quiet.</b>
-            <i>Explore ↓</i>
-          </div>
-        </>
-      )}
-      {visual === "relay" && (
-        <>
-          <div className="relay-rail">
-            <b>R/</b>
-            <span>QUEUE</span>
-            <span>WORK</span>
-            <span>PEOPLE</span>
-            <i>08:42</i>
-          </div>
-          <div className="relay-main">
-            <div className="relay-head"><span>Today / 07</span><b>Relay</b></div>
-            {[
-              ["Approve launch copy", "READY"],
-              ["Review motion pass", "IN REVIEW"],
-              ["Confirm handover", "WAITING"],
-            ].map(([task, status], index) => (
-              <div className="relay-row" key={task}>
-                <span className={`relay-dot relay-dot--${index + 1}`} />
-                <b>{task}</b>
-                <small>{status}</small>
-                <i>0{index + 1}</i>
-              </div>
-            ))}
-            <div className="relay-progress"><span /><b>5 of 7 moving</b></div>
-          </div>
-        </>
-      )}
-      {visual === "form" && (
-        <>
-          <div className="form-grid" />
-          <div className="form-number">27</div>
-          <div className="form-index-word">FORM<br />INDEX</div>
-          <div className="form-plan">
-            <span>PROJECT 027</span>
-            <div className="plan-room plan-room--a" />
-            <div className="plan-room plan-room--b" />
-            <div className="plan-room plan-room--c" />
-          </div>
-          <div className="form-meta">PLACE / MATERIAL / SCALE / IDEA</div>
-        </>
-      )}
-      {visual === "type" && (
-        <>
-          <div className="type-axis type-axis--x" />
-          <div className="type-axis type-axis--y" />
-          <div className="type-space-word type-space-word--one">TYPE</div>
-          <div className="type-space-word type-space-word--two">SPACE</div>
-          <div className="type-space-word type-space-word--three">01</div>
-          <div className="type-coordinates">X 47.2 / Y 19.6 / Z 08.4</div>
-          <div className="type-caption">A SPATIAL TYPE STUDY</div>
-        </>
-      )}
+    <>
+      <Image className="passport-globe" src="/work/passport-globe.svg" width={1000} height={1000} alt="" />
+      <div className="art-heading"><small>{project.copy[locale].title}</small><strong>{text.heading}</strong></div>
+      <div className="passport-selection"><small>{text.selected}</small><strong>{text.country}</strong><span dir="ltr">TR / 792</span></div>
+      <div className="passport-legend">{text.statuses.map((status, i) => <span key={status}><i className={`visa-dot visa-dot--${i}`} />{status}</span>)}</div>
+      <span className="passport-hint">{text.hint}</span>
+    </>
+  );
+}
+
+function NeighborhoodArtwork({ project, locale }: ProjectArtworkProps) {
+  const text = artworkCopy[locale].neighborhood;
+  return (
+    <>
+      <Image className="neighborhood-map" src="/work/neighborhood-area.svg" width={1000} height={600} alt="" />
+      <div className="art-heading"><small>{project.copy[locale].title}</small><strong>{text.heading}</strong></div>
+      <div className="neighborhood-labels" dir="ltr"><span>İSTANBUL</span><span>KOCAELİ</span></div>
+      <div className="neighborhood-markers" dir="ltr">
+        {[["40%", "48%", 0], ["46%", "55%", 1], ["58%", "50%", 2], ["65%", "64%", 4]].map(([left, top, category], i) => (
+          <span className={`neighborhood-pin ${i === 3 ? "neighborhood-pin--selected" : ""}`} style={{ left, top }} key={i}>
+            <i>{String(Number(category) + 1).padStart(2, "0")}</i>
+          </span>
+        ))}
+      </div>
+      <div className="neighborhood-post"><small>{text.sampleLabel}</small><strong>{text.sampleTitle}</strong><span>{text.sampleDetail}</span></div>
+      <div className="neighborhood-categories">{text.categories.map((category, i) => <span key={category}><i>{String(i+1).padStart(2, "0")}</i>{category}</span>)}</div>
+      <span className="neighborhood-area">{text.area}</span>
+      <span className="neighborhood-attribution" dir="ltr">geoBoundaries / © OpenStreetMap contributors</span>
+    </>
+  );
+}
+
+function MemoCoreArtwork({ project, locale }: ProjectArtworkProps) {
+  const text = artworkCopy[locale].memocore;
+  return (
+    <>
+      <div className="art-heading"><small>{project.copy[locale].title}</small><strong>{text.heading}</strong></div>
+      <div className="memo-system">
+        <div className="memo-input"><small>{text.input}</small><p>“{text.message}”</p></div>
+        <ol className="memo-pipeline">{text.nodes.map((node, i) => <li key={node}><span>0{i+1}</span><b>{node}</b>{i < text.nodes.length-1 && <i aria-hidden="true">↓</i>}</li>)}</ol>
+        <div className="memo-record">
+          <small>{text.output}</small>
+          <code dir="ltr"><span>intent: add_recurring_event</span><span>title: <bdi>{text.recordTitle}</bdi></span><span>recurrence_pattern:</span><span className="memo-value">every monday</span><span>time: 09:00</span><span>is_active: true</span></code>
+          <span className="memo-state"><i />{text.state}</span>
+        </div>
+      </div>
+      <p className="memo-note">{text.note}</p>
+    </>
+  );
+}
+
+export function ProjectArtwork({ project, locale, large = false }: ProjectArtworkProps) {
+  const text = artworkCopy[locale][project.visual];
+  return (
+    <div className={`project-art project-art--${project.visual} ${large ? "project-art--large" : ""}`} role="img" aria-label={text.alt}>
+      <div className="art-composition" aria-hidden="true">
+        <span className="art-caption">{text.caption}</span>
+        {project.visual === "passport" && <PassportArtwork project={project} locale={locale} />}
+        {project.visual === "neighborhood" && <NeighborhoodArtwork project={project} locale={locale} />}
+        {project.visual === "memocore" && <MemoCoreArtwork project={project} locale={locale} />}
+      </div>
     </div>
   );
 }

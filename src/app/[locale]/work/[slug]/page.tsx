@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
   const projectCopy = project.copy[locale];
   return createLocalizedMetadata({
     locale,
-    title: `${projectCopy.title} — ${project.kind === "concept" ? copy[locale].common.concept : copy[locale].common.experiment}`,
+    title: `${projectCopy.seoTitle} | Zurayq Studios`,
     description: projectCopy.summary,
     path: `/work/${slug}`,
     type: "article",
@@ -52,7 +52,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
   const projectCopy = project.copy[locale];
   const nextProject = projects[(projectIndex + 1) % projects.length];
   const nextCopy = nextProject.copy[locale];
-  const kind = project.kind === "concept" ? content.common.concept : content.common.experiment;
+  const kind = content.common.provenance[project.kind];
   const projectUrl = localizedUrl(locale, `/work/${slug}`);
 
   const structuredData = {
@@ -81,6 +81,7 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
         url: projectUrl,
         inLanguage: locale,
         genre: kind,
+        isBasedOn: project.sourceUrl,
       },
     ],
   };
@@ -92,11 +93,21 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
       <main className="case-study" id="case-content">
         <header className="case-hero section-pad">
           <div className="page-grid">
-            <Link className="case-back" href={`/${locale}/#work`}>← {content.common.backToWork}</Link>
-            <div className="case-hero__title">
+            <Link className="case-back" href={`/${locale}#work`}>← {content.common.backToWork}</Link>
+            <div className={`case-hero__title case-hero__title--${project.visual}`}>
               <span className="project-kind">{kind}</span>
               <h1>{projectCopy.title}</h1>
               <p>{projectCopy.descriptor}</p>
+              <div className="case-project-links">
+                <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${content.common.viewSource} — ${projectCopy.title}`}>
+                  {content.common.viewSource} <span aria-hidden="true">↗</span>
+                </a>
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`${content.common.openLive} — ${projectCopy.title}`}>
+                    {content.common.openLive} <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
             </div>
             <p className="case-hero__summary">{projectCopy.summary}</p>
             <dl className="case-facts">
@@ -107,7 +118,14 @@ export default async function CaseStudyPage({ params }: CasePageProps) {
         </header>
 
         <div className="case-artwork page-edge">
-          <ProjectArtwork visual={project.visual} title={projectCopy.title} large />
+          <ProjectArtwork project={project} locale={locale} large />
+          {project.visual === "neighborhood" && (
+            <p className="case-artwork-credit" dir="ltr">
+              <a href="https://www.geoboundaries.org/" target="_blank" rel="noopener noreferrer">geoBoundaries</a>
+              {" / "}
+              <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>
+            </p>
+          )}
         </div>
 
         <div className="case-notice page-grid">

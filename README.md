@@ -27,7 +27,7 @@ npm run build
 - Environment variable examples: `.env.example`
 - Shared visual system: `src/app/globals.css`
 
-The current portfolio entries are intentionally and visibly marked as **concept projects** or **studio experiments**. They do not claim clients, results, awards or performance metrics.
+The selected portfolio contains Passport Power, Your Friendly Neighborhood and MemoCore, all marked as **independent projects**. Copy is based on inspected public source code. See [the source audit](docs/portfolio-source-audit.md) for repository revisions, deployment checks, artwork sources and implementation limits.
 
 English, Turkish and Arabic are served at `/en`, `/tr` and `/ar`. Arabic uses a real RTL document direction and tailored logical-property layout behavior.
 

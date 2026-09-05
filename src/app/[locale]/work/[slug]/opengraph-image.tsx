@@ -1,14 +1,13 @@
 import { ImageResponse } from "next/og";
-import { isLocale, projects } from "@/lib/site-data";
+import { copy, isLocale, projects } from "@/lib/site-data";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const colors = {
-  sahra: { background: "#d76a48", foreground: "#27150e", accent: "#f6c861" },
-  relay: { background: "#4d5bec", foreground: "#f4f2ea", accent: "#a9ff57" },
-  form: { background: "#c7d5b1", foreground: "#122017", accent: "#ff5733" },
-  type: { background: "#11110f", foreground: "#f1efe8", accent: "#ff5733" },
+  passport: { background: "#070f1c", foreground: "#eef3f7", accent: "#22d3a5" },
+  neighborhood: { background: "#b7d0d1", foreground: "#193b32", accent: "#b53e26" },
+  memocore: { background: "#181c18", foreground: "#e9e7dc", accent: "#b9d17c" },
 };
 
 export default async function ProjectOpenGraphImage({
@@ -17,8 +16,10 @@ export default async function ProjectOpenGraphImage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale: value, slug } = await params;
-  const locale = isLocale(value) ? value : "en";
-  const project = projects.find((item) => item.slug === slug) ?? projects[0];
+  if (!isLocale(value)) return new Response(null, { status: 404 });
+  const locale = value;
+  const project = projects.find((item) => item.slug === slug);
+  if (!project) return new Response(null, { status: 404 });
   // The Arabic page copy stays fully localized; the social card uses the Latin
   // project name so ImageResponse never reaches for a runtime-hosted font.
   const projectCopy = project.copy[locale === "ar" ? "en" : locale];
@@ -39,12 +40,12 @@ export default async function ProjectOpenGraphImage({
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, letterSpacing: "0.06em", textTransform: "uppercase" }}>
-        <span>Zurayq Studios / Selected work</span>
-        <span>{project.kind === "concept" ? "Concept project" : "Studio experiment"} / {project.year}</span>
+        <span>Zurayq Studios / {copy[locale === "ar" ? "en" : locale].nav.work}</span>
+        <span>{copy[locale === "ar" ? "en" : locale].common.provenance[project.kind]} / {project.year}</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", width: 90, height: 12, marginBottom: 28, background: theme.accent }} />
-        <div style={{ display: "flex", fontSize: 132, fontWeight: 600, lineHeight: 0.78, letterSpacing: "-0.075em" }}>{projectCopy.title}</div>
+        <div style={{ display: "flex", maxWidth: 1090, fontSize: project.visual === "neighborhood" ? 94 : 120, fontWeight: 600, lineHeight: 0.98, letterSpacing: "-0.065em" }}>{projectCopy.title}</div>
         <div style={{ display: "flex", maxWidth: 760, marginTop: 34, fontSize: 28, lineHeight: 1.2 }}>{projectCopy.descriptor}</div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 17 }}>

@@ -2,7 +2,7 @@ export const locales = ["en", "tr", "ar"] as const;
 
 export type Locale = (typeof locales)[number];
 export type Direction = "ltr" | "rtl";
-export type ProjectKind = "concept" | "experiment";
+export type ProjectKind = "independent";
 
 export const localeConfig: Record<
   Locale,
@@ -55,8 +55,9 @@ export type SiteCopy = {
     selectedWork: string;
     exploreProject: string;
     backToWork: string;
-    concept: string;
-    experiment: string;
+    provenance: Record<ProjectKind, string>;
+    viewSource: string;
+    openLive: string;
     year: string;
     disciplines: string;
   };
@@ -172,8 +173,9 @@ export const copy: Record<Locale, SiteCopy> = {
       selectedWork: "See selected work",
       exploreProject: "Explore the project",
       backToWork: "Back to selected work",
-      concept: "Concept project",
-      experiment: "Studio experiment",
+      provenance: { independent: "Independent project" },
+      viewSource: "View source on GitHub",
+      openLive: "Open live project",
       year: "Year",
       disciplines: "Disciplines",
     },
@@ -212,11 +214,11 @@ export const copy: Record<Locale, SiteCopy> = {
       ],
     },
     work: {
-      eyebrow: "Selected explorations / 2026",
-      title: "A few things we’ve been exploring.",
+      eyebrow: "Selected work / 2026",
+      title: "Web, systems and interaction.",
       body:
-        "Concepts and experiments are useful while a young portfolio grows—as long as they are shown honestly.",
-      honesty: "Every piece below is studio-created and labelled exactly as such.",
+        "A globe you can explore, a map for local information and a backend that gives messages structure.",
+      honesty: "Three independent projects. Real source code, with no client relationship implied.",
     },
     services: {
       eyebrow: "What we do",
@@ -361,7 +363,7 @@ export const copy: Record<Locale, SiteCopy> = {
       idea: "The idea",
       system: "The system",
       build: "What we built",
-      note: "This is a self-initiated study, not client work. It contains no invented results or business claims.",
+      note: "Independent project. Presented as real design and development work, not commissioned client work.",
       honestyLabel: "Honesty note",
       nextProject: "Next exploration",
     },
@@ -387,8 +389,9 @@ export const copy: Record<Locale, SiteCopy> = {
       selectedWork: "Seçili işlere bak",
       exploreProject: "Projeyi incele",
       backToWork: "Seçili işlere dön",
-      concept: "Konsept proje",
-      experiment: "Stüdyo deneyi",
+      provenance: { independent: "Bağımsız proje" },
+      viewSource: "GitHub kaynak kodu",
+      openLive: "Canlı projeyi aç",
       year: "Yıl",
       disciplines: "Disiplinler",
     },
@@ -427,10 +430,10 @@ export const copy: Record<Locale, SiteCopy> = {
       ],
     },
     work: {
-      eyebrow: "Seçili keşifler / 2026",
-      title: "Bir süredir keşfettiğimiz birkaç şey.",
-      body: "Konseptler ve deneyler genç bir portföy büyürken değerlidir—dürüstçe sunuldukları sürece.",
-      honesty: "Aşağıdaki her iş stüdyoda üretildi ve neyse öyle etiketlendi.",
+      eyebrow: "Seçili projeler / 2026",
+      title: "Web, sistemler ve etkileşim.",
+      body: "Keşfedilebilen bir küre, yerel bilgi için bir harita ve mesajlara yapı kazandıran bir backend.",
+      honesty: "Üç bağımsız proje. Gerçek kaynak kodu; müşteri ilişkisi iddiası yok.",
     },
     services: {
       eyebrow: "Ne yapıyoruz",
@@ -533,7 +536,7 @@ export const copy: Record<Locale, SiteCopy> = {
       idea: "Fikir",
       system: "Sistem",
       build: "Ne ürettik",
-      note: "Bu, müşteri işi değil; stüdyonun kendi başlattığı bir çalışmadır. Uydurma sonuç veya iş iddiası içermez.",
+      note: "Bağımsız proje. Gerçek tasarım ve geliştirme çalışması olarak gösteriliyor; müşteri işi olarak sunulmuyor.",
       honestyLabel: "Şeffaflık notu",
       nextProject: "Sonraki keşif",
     },
@@ -558,8 +561,9 @@ export const copy: Record<Locale, SiteCopy> = {
       selectedWork: "شوف شغلنا",
       exploreProject: "شوف المشروع",
       backToWork: "ارجع للشغل المختار",
-      concept: "مشروع تصوّري",
-      experiment: "تجربة من الستوديو",
+      provenance: { independent: "مشروع مستقل" },
+      viewSource: "شوف الكود على GitHub",
+      openLive: "افتح المشروع",
       year: "السنة",
       disciplines: "المجالات",
     },
@@ -584,10 +588,10 @@ export const copy: Record<Locale, SiteCopy> = {
       ],
     },
     work: {
-      eyebrow: "تجارب مختارة / 2026",
-      title: "شوية حاجات قاعدين نستكشفوا فيها.",
-      body: "المشاريع التصوّرية وتجارب الستوديو تورّي كيف نفكّروا ونخدموا—المهم نعرضوها بصراحة زي ما هي.",
-      honesty: "كل شغل تحت بديناه داخل الستوديو، ومكتوب بوضوح لو هو مشروع تصوّري أو تجربة.",
+      eyebrow: "شغل مختار / 2026",
+      title: "ويب، أنظمة وحاجات تتفاعل معاها.",
+      body: "كرة أرضية تدور فيها، خريطة للي صاير قريب منك، وBackend يرتّب اللي في رسائلك.",
+      honesty: "ثلاثة مشاريع مستقلة بكود فعلي. ما نقدموهاش على إنها شغل لعملاء.",
     },
     services: {
       eyebrow: "شن نديروا",
@@ -690,7 +694,7 @@ export const copy: Record<Locale, SiteCopy> = {
       idea: "الفكرة",
       system: "النظام",
       build: "شن بنينا",
-      note: "هذه دراسة بديناها داخل الستوديو، مش شغل لعميل. ما فيهاش نتائج ولا ادعاءات شغل مخترعة.",
+      note: "مشروع مستقل. نعرضوه هنا كشغل فعلي في التصميم والبرمجة، مش على إنه شغل لعميل.",
       honestyLabel: "ملاحظة بصراحة",
       nextProject: "المشروع اللي بعده",
     },
@@ -699,6 +703,7 @@ export const copy: Record<Locale, SiteCopy> = {
 
 type LocalizedProjectCopy = {
   title: string;
+  seoTitle: string;
   descriptor: string;
   summary: string;
   context: string;
@@ -711,189 +716,146 @@ export type Project = {
   slug: string;
   kind: ProjectKind;
   year: string;
-  visual: "sahra" | "relay" | "form" | "type";
+  visual: "passport" | "neighborhood" | "memocore";
+  sourceUrl: string;
+  liveUrl: string | null;
   disciplines: Record<Locale, string[]>;
   copy: Record<Locale, LocalizedProjectCopy>;
 };
 
 export const projects: Project[] = [
   {
-    slug: "sahra-house",
-    kind: "concept",
+    slug: "passport-power",
+    kind: "independent",
     year: "2026",
-    visual: "sahra",
+    visual: "passport",
+    sourceUrl: "https://github.com/zurayq/pasaporto",
+    liveUrl: "https://pasaporto.vercel.app",
     disciplines: {
-      en: ["Web design", "Multilingual UX", "Motion"],
-      tr: ["Web design", "Multilingual UX", "Motion"],
-      ar: ["تصميم مواقع", "تجربة متعددة اللغات", "Motion"],
+      en: ["Interactive web", "Data visualization", "Three.js", "Creative development"],
+      tr: ["İnteraktif web", "Veri görselleştirme", "Three.js", "Yaratıcı geliştirme"],
+      ar: ["Interactive Web", "عرض البيانات", "Three.js", "Creative Development"],
     },
     copy: {
       en: {
-        title: "Sahra House",
-        descriptor: "A fictional coastal stay, told slowly.",
-        summary:
-          "A multilingual hospitality concept with quiet editorial layouts, an unhurried booking path and Arabic considered from the first grid.",
-        context:
-          "Sahra House is a fictional retreat created to explore how a small hospitality brand can feel considered without becoming precious or difficult to use.",
-        idea:
-          "Let the pace of the place shape the pace of the interface. Information remains close, while imagery, type and transitions are given room to breathe.",
-        system:
-          "A bilingual editorial grid adapts deliberately between Latin and Arabic. Directional elements change; the photography and spatial rhythm do not simply flip.",
-        build:
-          "A responsive booking path, modular stay pages, motion studies and a content model ready for seasonal stories and multiple languages.",
+        title: "Passport Power",
+        seoTitle: "Passport Power — Interactive 3D Visa Explorer",
+        descriptor: "Global visa access, given a geography.",
+        summary: "A searchable passport explorer that connects visa-access data to a Three.js globe. Pick a passport, rotate the world and inspect destinations by entry category.",
+        context: "A list can tell you where a passport travels. It is less good at showing the pattern. Passport Power explores what happens when the same information becomes something you can move around.",
+        idea: "Make the country the interface. Selecting a passport recolors the globe; hovering and clicking bring the destination and its access category into focus without losing the wider view.",
+        system: "A passport catalogue and visa matrix connect search, sorting, access totals and country details. Geographic boundaries become a canvas texture, with separate colors for visa-free, on-arrival, eVisa and visa-required access.",
+        build: "HTML, CSS and JavaScript handle the interface; Three.js and OrbitControls handle the globe. TopoJSON boundaries, raycasting and point-in-polygon checks connect the two. This is a visualization of the repository dataset, not a live travel-advice service.",
       },
       tr: {
-        title: "Sahra House",
-        descriptor: "Yavaş anlatılan hayali bir kıyı konaklaması.",
-        summary: "Sakin editoryal düzenler, telaşsız bir rezervasyon yolu ve ilk grid'den itibaren düşünülen Arapça ile çok dilli konaklama konsepti.",
-        context: "Sahra House, küçük bir konaklama markasının kullanımı zorlaştırmadan nasıl özenli hissettirebileceğini araştırmak için oluşturulmuş hayali bir inziva yeridir.",
-        idea: "Mekânın temposu arayüzün temposunu belirliyor. Bilgi yakın kalırken görsellere, tipografiye ve geçişlere nefes alacak alan veriliyor.",
-        system: "İki dilli editoryal grid Latin ve Arapça arasında bilinçli biçimde uyarlanıyor. Yönlü öğeler değişiyor; görseller ve mekânsal ritim körlemesine çevrilmiyor.",
-        build: "Duyarlı rezervasyon akışı, modüler konaklama sayfaları, hareket çalışmaları ve mevsimsel hikâyelerle farklı dillere hazır içerik modeli.",
+        title: "Passport Power",
+        seoTitle: "Passport Power — İnteraktif 3D Vize Atlası",
+        descriptor: "Vize erişiminin coğrafi görünümü.",
+        summary: "Vize erişim verisini Three.js küresine bağlayan, aranabilir bir pasaport gezgini. Pasaportu seçin, dünyayı döndürün ve ülkelerin giriş kategorilerini inceleyin.",
+        context: "Bir liste, pasaportla nerelere gidilebildiğini anlatır; coğrafi örüntüyü aynı açıklıkla göstermez. Passport Power, bu bilgiyi içinde gezilebilen bir görünüme dönüştürüyor.",
+        idea: "Ülkenin kendisini arayüze dönüştürmek. Pasaport seçimi kürenin renklerini değiştiriyor; üzerine gelme ve tıklama, genel görünümü kaybetmeden ülkeyi ve giriş kategorisini öne çıkarıyor.",
+        system: "Pasaport kataloğu ve vize matrisi; arama, sıralama, kategori toplamları ve ülke detaylarını birleştiriyor. Coğrafi sınırlar canvas dokusuna dönüşüyor; vizesiz, kapıda vize, eVisa ve vize gerekli durumları ayrı renklerle gösteriliyor.",
+        build: "Arayüz HTML, CSS ve JavaScript; küre Three.js ve OrbitControls ile kuruldu. TopoJSON sınırları, raycasting ve noktanın çokgen içinde olup olmadığını denetleyen hesaplamalar iki katmanı bağlıyor. Görselleştirme depodaki veri kümesine dayanıyor; canlı seyahat danışmanlığı sunmuyor.",
       },
       ar: {
-        title: "Sahra House",
-        descriptor: "إقامة متخيّلة على البحر، نحكوها على راحتنا.",
-        summary: "تصوّر لمشروع ضيافة بثلاث لغات، layout تحريري هادي ومسار حجز من غير استعجال، والعربي محسوب من أول grid.",
-        context: "Sahra House مكان إقامة متخيّل بنيناه باش نستكشفوا كيف براند ضيافة صغير يقدر يكون مرتب ومدروس، من غير تكلّف ومن غير ما يصعّب الاستعمال.",
-        idea: "خلّينا هدوء المكان يحدد إيقاع الواجهة. المعلومة قريبة، والصور، الخط والحركة عندهم مساحة يتنفسوا.",
-        system: "الـ editorial grid يتبدّل بوعي بين العربي واللاتيني. العناصر اللي عندها اتجاه تتغيّر؛ الصور وإيقاع المساحات ما نقلبوهمش بشكل آلي.",
-        build: "مسار حجز Responsive، صفحات مرنة للإقامة، تجارب Motion ونظام محتوى جاهز للمواسم واللغات المختلفة.",
+        title: "Passport Power",
+        seoTitle: "Passport Power — جوازات وفيزا على كرة 3D",
+        descriptor: "وين يوصّلك جوازك؟ شوفها على الخريطة.",
+        summary: "مستكشف جوازات فيه بحث وكرة أرضية بـ Three.js. تختار الجواز، تدوّر العالم وتشوف كل وجهة شن نوع الدخول ليها.",
+        context: "القائمة تقوللك وين تقدر تمشي بجوازك، لكن الصورة الكبيرة تضيع بين الأسماء. في Passport Power جرّبنا نخلّوا نفس البيانات حاجة تقدر تدور فيها وتشوفها جغرافياً.",
+        idea: "خلّينا البلد نفسه واجهة. تختار الجواز فتتبدّل ألوان الكرة، ولما تمرّ على بلد أو تضغط عليه تشوف اسمه ونوع الدخول، والعالم باقي قدامك.",
+        system: "ربطنا قائمة الجوازات وبيانات الفيزا بالبحث، الترتيب، أعداد كل فئة وتفاصيل البلدان. الحدود الجغرافية تولّي texture على Canvas، وكل حالة دخول عندها لونها: من غير فيزا، عند الوصول، eVisa أو فيزا مطلوبة.",
+        build: "الواجهة بـ HTML وCSS وJavaScript، والكرة بـ Three.js وOrbitControls. حدود TopoJSON وحسابات raycasting تربط المكان اللي تضغط عليه ببياناته. العرض يخدم ببيانات الريبو، مش خدمة معلومات سفر تتحدّث مباشرة.",
       },
     },
   },
   {
-    slug: "relay",
-    kind: "concept",
+    slug: "your-friendly-neighborhood",
+    kind: "independent",
     year: "2026",
-    visual: "relay",
+    visual: "neighborhood",
+    sourceUrl: "https://github.com/zurayq/Your-Friendly-Neighborhood",
+    liveUrl: "https://your-friendly-neighborhood-iota.vercel.app/",
     disciplines: {
-      en: ["Product design", "Web application", "Interaction"],
-      tr: ["Product design", "Web application", "Interaction"],
-      ar: ["تصميم منتجات", "Web App", "تفاعل"],
+      en: ["Web application", "Map interface", "Python / Flask", "Backend systems"],
+      tr: ["Web uygulaması", "Harita arayüzü", "Python / Flask", "Backend sistemleri"],
+      ar: ["Web App", "واجهة خريطة", "Python / Flask", "Backend"],
     },
     copy: {
       en: {
-        title: "Relay",
-        descriptor: "Operations without dashboard soup.",
-        summary:
-          "A focused operations product for small teams: projects, approvals and live status without turning everyday work into a wall of widgets.",
-        context:
-          "Relay is a fictional product study for small creative teams whose project status currently lives across messages, spreadsheets and memory.",
-        idea:
-          "Organize the product around decisions rather than data density. The most important next action should be visible before the reporting layer.",
-        system:
-          "A compact information model connects work, approvals and owners. Color carries state, but every status also has a clear text and shape treatment.",
-        build:
-          "Responsive product flows for the daily queue, project detail, approval history and a calmer management overview.",
+        title: "Your Friendly Neighborhood",
+        seoTitle: "Your Friendly Neighborhood — Community Map Web App",
+        descriptor: "Local information starts with a place.",
+        summary: "A community map for İstanbul and Kocaeli, connecting local meetups, events, help and opportunities to places, categories and content lifetimes.",
+        context: "Local information gets scattered across messages and feeds. This project puts the neighborhood first, so an activity or request can be found by where it happens.",
+        idea: "Start with a place, then share a signal. People can post without a public account profile, choose a category and give the information a useful lifetime rather than leave it in a permanent feed.",
+        system: "MapLibre GL and deck.gl connect the map to a Flask API. GeoJSON service boundaries are enforced server-side; posts carry visibility periods, support counts and reporting rules. Management codes control closing and deleting a post.",
+        build: "Python, Flask, SQLAlchemy and PostgreSQL support the application, with Shapely boundary checks, migrations, text moderation and rate limits. The interface includes 2D/3D map modes and category markers. The code demonstrates the system; no audience or usage figures are claimed.",
       },
       tr: {
-        title: "Relay",
-        descriptor: "Panel karmaşası olmadan operasyon.",
-        summary: "Küçük ekipler için odaklı operasyon ürünü: günlük işi widget duvarına çevirmeden projeler, onaylar ve canlı durum.",
-        context: "Relay, proje durumu mesajlar, tablolar ve hafıza arasında kalan küçük yaratıcı ekipler için hazırlanmış hayali bir ürün çalışmasıdır.",
-        idea: "Ürünü veri yoğunluğu yerine kararlar etrafında düzenlemek. En önemli sonraki eylem, raporlama katmanından önce görünür olmalı.",
-        system: "Kompakt bilgi modeli işleri, onayları ve sorumluları birbirine bağlıyor. Renk durumu taşıyor, ancak her durumun açık metin ve biçim karşılığı da var.",
-        build: "Günlük sıra, proje detayı, onay geçmişi ve daha sakin bir yönetim görünümü için duyarlı ürün akışları.",
+        title: "Your Friendly Neighborhood",
+        seoTitle: "Your Friendly Neighborhood — Topluluk Haritası",
+        descriptor: "Yerel bilgi bir yerden başlar.",
+        summary: "İstanbul ve Kocaeli için buluşmaları, etkinlikleri, yardımlaşmayı ve fırsatları konum, kategori ve görünürlük süreleriyle birleştiren topluluk haritası.",
+        context: "Yerel bilgi mesajlar ve akışlar arasında dağılıyor. Bu proje, bir etkinliği veya yardım talebini gerçekleştiği yere göre bulabilmek için mahalleyi merkeze alıyor.",
+        idea: "Önce bir yer seçmek, sonra bir paylaşım bırakmak. Kullanıcılar herkese açık hesap profili olmadan içerik ekleyebiliyor, kategori seçiyor ve paylaşımın ne kadar süre görünür kalacağını belirliyor.",
+        system: "MapLibre GL ve deck.gl, haritayı Flask API'sine bağlıyor. GeoJSON hizmet sınırları sunucuda denetleniyor; paylaşımlar görünürlük süresi, destek sayısı ve bildirim kuralları taşıyor. Yönetim kodları, paylaşımı kapatma ve silme işlemlerini kontrol ediyor.",
+        build: "Uygulama Python, Flask, SQLAlchemy ve PostgreSQL üzerine kurulu. Shapely sınır kontrolleri, veritabanı geçişleri, metin moderasyonu ve istek limitleri sistemi tamamlıyor. Arayüzde 2D/3D harita modları ve kategori işaretçileri var; kullanıcı veya kullanım rakamı iddiası yok.",
       },
       ar: {
-        title: "Relay",
-        descriptor: "نديروا الشغل من غير شوربة dashboards.",
-        summary: "نظام مرتب للفرق الصغيرة: مشاريع، موافقات وحالة مباشرة، من غير ما يتحول شغل كل يوم لحايط widgets.",
-        context: "Relay دراسة لمنتج متخيّل للفرق الإبداعية الصغيرة اللي حالة مشاريعها ضايعة بين المسجات، الجداول والذاكرة.",
-        idea: "رتّبنا المنتج حول القرارات، مش حول كمية البيانات. أهم خطوة جاية لازم تبان قبل التقارير.",
-        system: "نموذج معلومات خفيف يربط الشغل بالموافقات والمسؤولين. اللون يوضح الحالة، لكن كل حالة عندها نص وشكل واضحين حتى من غير لون.",
-        build: "مسارات Responsive لقائمة اليوم، تفاصيل المشروع، سجل الموافقات ونظرة إدارة أهدى.",
+        title: "Your Friendly Neighborhood",
+        seoTitle: "Your Friendly Neighborhood — Web App لخريطة المجتمع",
+        descriptor: "شن صاير قريب منك؟ ابدأ من المكان.",
+        summary: "خريطة مجتمع لإسطنبول وكوجالي، تربط اللقاءات، الفعاليات، المساعدة والفرص بأماكنها، تصنيفاتها ومدة ظهورها.",
+        context: "أخبار المنطقة تتوزّع بين المسجات والـ feeds. هنا بدينا من الحومة، باش تلقى النشاط أو طلب المساعدة على حسب وين صاير.",
+        idea: "اختار مكان وبعدها حطّ إشارة. تقدر تنشر من غير بروفايل حساب عام، تختار التصنيف وتحدد قداش المنشور يقعد ظاهر، بدل ما يفضل في feed للأبد.",
+        system: "ربطنا MapLibre GL وdeck.gl بـ Flask API. السيرفر يتأكد من حدود المنطقة ببيانات GeoJSON؛ وكل منشور عنده مدة ظهور، دعم وقواعد للتبليغ. كود إدارة خاص بالمنشور يخليك تسكّره أو تمسحه.",
+        build: "الـ Backend بـ Python وFlask وSQLAlchemy وPostgreSQL، ومعاه Shapely لفحص الحدود، migrations، فلترة للنص وحدود للطلبات. الواجهة فيها عرض 2D و3D وعلامات حسب التصنيف. نعرضوا النظام اللي في الكود، من غير أرقام مستخدمين مخترعة.",
       },
     },
   },
   {
-    slug: "form-index",
-    kind: "concept",
+    slug: "memocore",
+    kind: "independent",
     year: "2026",
-    visual: "form",
+    visual: "memocore",
+    sourceUrl: "https://github.com/zurayq/memocore",
+    liveUrl: null,
     disciplines: {
-      en: ["Creative direction", "Website", "Content system"],
-      tr: ["Creative direction", "Website", "Content system"],
-      ar: ["إخراج إبداعي", "موقع ويب", "نظام محتوى"],
+      en: ["AI systems", "FastAPI", "Backend architecture", "Automation"],
+      tr: ["AI sistemleri", "FastAPI", "Backend mimarisi", "Otomasyon"],
+      ar: ["AI Systems", "FastAPI", "Backend", "Automation"],
     },
     copy: {
       en: {
-        title: "Form Index",
-        descriptor: "An architecture archive with room to think.",
-        summary:
-          "An editorial archive for a fictional architecture practice—built to explore projects, materials and ideas without flattening them into identical cards.",
-        context:
-          "Form Index asks how an architecture practice can document years of work without reducing every project to the same thumbnail and paragraph.",
-        idea:
-          "Treat the archive as a working index. Projects can be entered through place, material, scale or idea instead of one fixed chronology.",
-        system:
-          "A modular typographic grid supports long-form reading, quick filtering and expressive project openings while sharing one structured content model.",
-        build:
-          "An adaptive archive, project narratives, material cross-links and a restrained motion language based on plans opening and closing.",
+        title: "MemoCore",
+        seoTitle: "MemoCore — AI Scheduling Backend",
+        descriptor: "A message becomes something structured.",
+        summary: "An AI-assisted backend that parses messages into calendar and task operations, with dedicated services, asynchronous persistence and a reminder scheduler.",
+        context: "Calendars usually ask people to turn an intention into fields and date pickers. MemoCore starts with the message and explores how to turn that intention into explicit application data.",
+        idea: "Language is the input layer. An AI parser proposes a structured intent; typed schemas, a dispatch table and application services handle the event or task operation.",
+        system: "The current parser uses Groq with Llama 3.3. WhatsApp Cloud API webhook handling checks the configured sender, parses the message and dispatches to event, task or recurring-event services using async SQLAlchemy.",
+        build: "FastAPI, Pydantic, UUID-based records and SQLite/PostgreSQL support form the backend. APScheduler checks upcoming events, but reminders currently go to logs. Recurring patterns are stored, not expanded into scheduled occurrences. WhatsApp reply code exists; live delivery is not verified.",
       },
       tr: {
-        title: "Form Index",
-        descriptor: "Düşünmek için alan bırakan mimarlık arşivi.",
-        summary: "Hayali bir mimarlık pratiği için; projeleri, malzemeleri ve fikirleri aynı kartlara sıkıştırmadan keşfetmeye yönelik editoryal arşiv.",
-        context: "Form Index, bir mimarlık pratiğinin yıllar süren işlerini her projeyi aynı küçük görsel ve paragrafa indirgemeden nasıl belgeleyebileceğini soruyor.",
-        idea: "Arşivi çalışan bir indeks gibi ele almak. Projelere tek bir kronoloji yerine yer, malzeme, ölçek veya fikir üzerinden girilebiliyor.",
-        system: "Modüler tipografik grid, tek bir yapılı içerik modeliyle uzun okuma, hızlı filtreleme ve etkileyici proje açılışlarını destekliyor.",
-        build: "Uyarlanabilir arşiv, proje anlatıları, malzeme bağlantıları ve planların açılıp kapanmasından türeyen ölçülü hareket dili.",
+        title: "MemoCore",
+        seoTitle: "MemoCore — AI Destekli Planlama Backend'i",
+        descriptor: "Bir mesaj, düzenli veriye dönüşür.",
+        summary: "Mesajları takvim ve görev işlemlerine dönüştüren; ayrı servisler, asenkron veri saklama ve hatırlatma zamanlayıcısı içeren AI destekli backend.",
+        context: "Takvimler genellikle niyeti alanlara ve tarih seçicilere dönüştürmeyi kullanıcıya bırakıyor. MemoCore mesajla başlıyor ve bu niyeti açık uygulama verisine dönüştürmenin yolunu araştırıyor.",
+        idea: "Doğal dil giriş katmanı. AI ayrıştırıcısı yapılandırılmış bir niyet öneriyor; tipli şemalar, yönlendirme tablosu ve uygulama servisleri etkinlik veya görev işlemini yürütüyor.",
+        system: "Güncel ayrıştırıcı Groq üzerinden Llama 3.3 kullanıyor. WhatsApp Cloud API webhook kodu tanımlı göndericiyi kontrol ediyor, mesajı ayrıştırıyor ve async SQLAlchemy kullanan etkinlik, görev veya tekrarlayan etkinlik servislerine yönlendiriyor.",
+        build: "Backend; FastAPI, Pydantic, UUID kayıtları ve SQLite/PostgreSQL desteğiyle kurulu. APScheduler yaklaşan etkinlikleri kontrol ediyor, ancak hatırlatmalar şu an loglara yazılıyor. Tekrar kuralları saklanıyor; planlı oluşumlara dönüştürülmüyor. WhatsApp yanıt kodu var, canlı teslimat doğrulanmadı.",
       },
       ar: {
-        title: "Form Index",
-        descriptor: "أرشيف عمارة يخلي مساحة للتفكير.",
-        summary: "أرشيف تحريري لمكتب عمارة متخيّل، نستكشفوا بيه المشاريع، المواد والأفكار من غير ما نحشروهم كلهم في نفس شكل الكروت.",
-        context: "في Form Index سألنا: كيف مكتب عمارة يوثّق سنين من الشغل من غير ما يختصر كل مشروع في صورة صغيرة ونفس الفقرة؟",
-        idea: "عاملنا الأرشيف كـ index حي. تقدر تدخل للمشاريع من المكان، المادة، الحجم أو الفكرة، مش بس من ترتيب زمني واحد.",
-        system: "typographic grid مرن يخدم القراءة الطويلة، الفلترة السريعة وبدايات مشاريع عندها شخصية، وكلها فوق نفس نظام المحتوى.",
-        build: "أرشيف Responsive، حكايات للمشاريع، روابط بين المواد وحركة هادية مستوحاة من فتح المخططات وتسكيرها.",
-      },
-    },
-  },
-  {
-    slug: "type-space",
-    kind: "experiment",
-    year: "2026",
-    visual: "type",
-    disciplines: {
-      en: ["Creative development", "WebGL study", "Motion"],
-      tr: ["Creative development", "WebGL study", "Motion"],
-      ar: ["Creative Development", "تجربة WebGL", "Motion"],
-    },
-    copy: {
-      en: {
-        title: "Type / Space",
-        descriptor: "Where an interface becomes an environment.",
-        summary:
-          "A browser-based study in spatial typography, light and movement—made to test where an interface ends and an environment begins.",
-        context:
-          "Type / Space is a self-initiated technical experiment. It has no fictional brand or business objective hiding behind it.",
-        idea:
-          "Use words as architecture. Reading becomes movement through scale, depth and light, while navigation stays predictable and keyboard accessible.",
-        system:
-          "A small set of spatial rules composes type in layers. Input changes perspective gently; reduced-motion and lower-power devices receive a flat graphic state.",
-        build:
-          "A performance-minded WebGL sketch, DOM-based accessible navigation and a static fallback that preserves the same composition.",
-      },
-      tr: {
-        title: "Type / Space",
-        descriptor: "Arayüzün ortama dönüştüğü yer.",
-        summary: "Arayüzün nerede bitip ortamın nerede başladığını sınamak için üretilen mekânsal tipografi, ışık ve hareket çalışması.",
-        context: "Type / Space stüdyonun başlattığı teknik bir deneydir. Arkasında hayali bir marka veya iş hedefi yoktur.",
-        idea: "Kelimeleri mimari gibi kullanmak. Okuma; ölçek, derinlik ve ışık içinde harekete dönüşürken navigasyon tanıdık ve klavyeyle erişilebilir kalıyor.",
-        system: "Küçük bir mekânsal kural seti tipografiyi katmanlar hâlinde kuruyor. Girdi perspektifi hafifçe değiştiriyor; azaltılmış hareket ve düşük güçlü cihazlar düz grafik durumunu alıyor.",
-        build: "Performans odaklı WebGL eskizi, DOM tabanlı erişilebilir navigasyon ve aynı kompozisyonu koruyan statik yedek görünüm.",
-      },
-      ar: {
-        title: "Type / Space",
-        descriptor: "لما الواجهة تولّي مكان.",
-        summary: "تجربة داخل المتصفح بالخط المكاني، الضوء والحركة، باش نشوفوا وين توقف الواجهة ووين تبدأ البيئة.",
-        context: "Type / Space تجربة تقنية بديناها في الستوديو. ما وراهاش براند خيالي ولا هدف تجاري ملفّق.",
-        idea: "استعملنا الكلمات كأنها عمارة. القراءة تولّي حركة بين الحجم، العمق والضوء، والتنقّل يفضل واضح ويخدم بالكيبورد.",
-        system: "شوية قواعد مكانية يركّبوا الحروف في طبقات. التفاعل يغيّر المنظور بهدوء؛ الأجهزة الأضعف أو إعدادات تقليل الحركة ياخذوا نسخة مسطحة.",
-        build: "تجربة WebGL محسوبة للأداء، تنقّل accessible مبني على DOM، ونسخة ثابتة تحافظ على نفس التكوين.",
+        title: "MemoCore",
+        seoTitle: "MemoCore — Backend للمواعيد والمهام بالـ AI",
+        descriptor: "من رسالة عادية، لبيانات مرتبة.",
+        summary: "Backend بالـ AI يفهم الرسائل ويحوّلها لعمليات على المواعيد والمهام، بخدمات منفصلة، تخزين async وscheduler للتذكيرات.",
+        context: "التقويم عادة يطلب منك تحوّل اللي في بالك لحقول وتواريخ. في MemoCore بدينا من الرسالة: كيف نخلّوا الكلام العادي يولّي بيانات واضحة يقدر النظام يخدم بيها؟",
+        idea: "الكلام هو المدخل. الـ AI يقترح intent مرتب، وبعده الـ schemas، جدول التوجيه وخدمات التطبيق يتولّوا عملية الموعد أو المهمة.",
+        system: "الـ parser الحالي يخدم بـ Groq وLlama 3.3. كود WhatsApp Cloud API webhook يتأكد من المرسل المحدد، يفهم الرسالة ويوجّهها لخدمات المواعيد، المهام أو المواعيد المتكررة، والتخزين بـ async SQLAlchemy.",
+        build: "بنينا الـ Backend بـ FastAPI وPydantic، ومعرّفات UUID ودعم SQLite وPostgreSQL. APScheduler يراجع المواعيد القريبة، لكن التذكيرات توا تطلع في الـ logs. قواعد التكرار تتخزّن بس؛ ما تتحوّلش لمواعيد مجدولة. كود ردود WhatsApp موجود، لكن التوصيل الفعلي مش متأكدين منه.",
       },
     },
   },
